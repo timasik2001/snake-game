@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <random>
 
 #include <gameField.h>
 #include <gameWindowBuffer.h>
@@ -10,6 +11,7 @@ GameField::GameField()
 {
     this->direction = MOVING_RIGHT;
     this->head = { 0, 0 };
+    this->food = { rand() % 70, rand() % 50 };
     this->grid = new char *[60];
     for (int i = 0; i < 60; i++)
     {
@@ -36,6 +38,10 @@ void GameField::GenerateGrid()
             {
                 this->grid[i][j] = SNAKE;
             }
+            else if (this->food.x == j && this->food.y == i)
+            {
+                this->grid[i][j] = FOOD;
+            }
             else
             {
                 this->grid[i][j] = 0;
@@ -46,14 +52,9 @@ void GameField::GenerateGrid()
                 {
                     this->grid[i][j] = SNAKE;
                 }
-                else
-                {
-                    this->grid[i][j] = 0;
-                }
             }
         }
     }
-    this->grid[0][0] = FOOD;
 }
 void GameField::RenderGameField(GameWindowBuffer &gameWindowBuffer)
 {
@@ -134,11 +135,11 @@ void GameField::MoveSnake()
     }
 
 
-    if (this->food.x == this->head.x && this->food.y == this->head.y)
+    if (this->grid[this->head.y][this->head.x] == FOOD)
     {
         this->Grove();
         std::cout << "y";
-        //this->food.ChangePos();
+        this->ChangeFoodPos();
     }
     this->tail[0].x = this->head.x;
     this->tail[0].y = this->head.y;
@@ -166,4 +167,9 @@ void GameField::Grove()
 {
     POINT point = { this->tail[0].x, this->tail[0].y };
     this->tail.push_back(point);
+}
+void GameField::ChangeFoodPos()
+{
+    this->food.y = rand() % 50;
+    this->food.x = rand() % 70;
 }

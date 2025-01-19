@@ -26,4 +26,5 @@ public:
     void MoveSnake();
     void ChangeDirection(int direction);
     void Grove();
+    void ChangeFoodPos();
 };

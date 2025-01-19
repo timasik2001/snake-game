@@ -92,7 +92,7 @@ int main()
     while (windowStuff.running)
     {
         ++iter;
-        if (iter > 100)
+        if (iter > 50)
         {
             iter = 0;
             gameField.MoveSnake();
