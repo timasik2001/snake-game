@@ -92,7 +92,7 @@ int main()
     while (windowStuff.running)
     {
         ++iter;
-        if (iter > 50)
+        if (iter > gameField.frec)
         {
             iter = 0;
             gameField.MoveSnake();

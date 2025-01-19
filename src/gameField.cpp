@@ -10,6 +10,7 @@
 GameField::GameField()
 {
     this->direction = MOVING_RIGHT;
+    this->frec = 50;
     this->head = { 0, 0 };
     this->food = { rand() % 70, rand() % 50 };
     this->grid = new char *[60];
@@ -165,6 +166,7 @@ void GameField::ChangeDirection(int direction)
 
 void GameField::Grove()
 {
+    this->frec--;
     POINT point = { this->tail[0].x, this->tail[0].y };
     this->tail.push_back(point);
 }

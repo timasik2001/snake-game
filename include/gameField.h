@@ -18,6 +18,7 @@ public:
     POINT head;
     std::vector<POINT> tail;
     POINT food;
+    int frec;
     int direction;
     GameField();
     ~GameField();
